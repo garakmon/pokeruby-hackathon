@@ -54,5 +54,4 @@
 	.include "data/maps/SafariZone_Northeast/connections.inc"
 	.include "data/maps/SafariZone_Southwest/connections.inc"
 	.include "data/maps/SafariZone_Southeast/connections.inc"
-	.include "data/maps/LittlerootTown/connections.inc"
 	.include "data/maps/Route101/connections.inc"
