@@ -239,13 +239,13 @@ static const u8 sTileBitAttributes[] =
     TILE_ATTRIBUTES(FALSE, FALSE, FALSE), // MB_BLUEPRINT
     TILE_ATTRIBUTES(FALSE, FALSE, FALSE), // MB_UNUSED_E7
     TILE_ATTRIBUTES(FALSE, FALSE, FALSE), // MB_UNUSED_E8
-    TILE_ATTRIBUTES(FALSE, FALSE, FALSE), // MB_UNUSED_E9
-    TILE_ATTRIBUTES(FALSE, FALSE, FALSE), // MB_UNUSED_EA
-    TILE_ATTRIBUTES(FALSE, FALSE, FALSE), // MB_UNUSED_EB
-    TILE_ATTRIBUTES(FALSE, FALSE, FALSE), // MB_UNUSED_EC
-    TILE_ATTRIBUTES(FALSE, FALSE, FALSE), // MB_UNUSED_ED
-    TILE_ATTRIBUTES(FALSE, FALSE, FALSE), // MB_UNUSED_EE
-    TILE_ATTRIBUTES(FALSE, FALSE, FALSE)  // MB_UNUSED_EF
+    TILE_ATTRIBUTES(FALSE, FALSE, FALSE), // MB_MIRROR_1
+    TILE_ATTRIBUTES(FALSE, FALSE, FALSE), // MB_MIRROR_2
+    TILE_ATTRIBUTES(FALSE, FALSE, FALSE), // MB_MIRROR_3
+    TILE_ATTRIBUTES(FALSE, FALSE, FALSE), // MB_MIRROR_4
+    TILE_ATTRIBUTES(FALSE, FALSE, FALSE), // MB_MIRROR_5
+    TILE_ATTRIBUTES(FALSE, FALSE, FALSE), // MB_MIRROR_6
+    TILE_ATTRIBUTES(TRUE, FALSE, FALSE),  // MB_MIRROR_7
 };
 
 // only used as default case for checking jump landing in field_ground_effect.
@@ -329,6 +329,41 @@ bool8 MetatileBehavior_IsReflective(u8 metatileBehavior)
         return TRUE;
     else
         return FALSE;
+}
+
+bool8 MetatileBehavior_IsFunhouseMirror1(u8 metatileBehavior)
+{
+    return (metatileBehavior == MB_MIRROR_1 ? TRUE : FALSE);
+}
+
+bool8 MetatileBehavior_IsFunhouseMirror2(u8 metatileBehavior)
+{
+    return (metatileBehavior == MB_MIRROR_2 ? TRUE : FALSE);
+}
+
+bool8 MetatileBehavior_IsFunhouseMirror3(u8 metatileBehavior)
+{
+    return (metatileBehavior == MB_MIRROR_3 ? TRUE : FALSE);
+}
+
+bool8 MetatileBehavior_IsFunhouseMirror4(u8 metatileBehavior)
+{
+    return (metatileBehavior == MB_MIRROR_4 ? TRUE : FALSE);
+}
+
+bool8 MetatileBehavior_IsFunhouseMirror5(u8 metatileBehavior)
+{
+    return (metatileBehavior == MB_MIRROR_5 ? TRUE : FALSE);
+}
+
+bool8 MetatileBehavior_IsFunhouseMirror6(u8 metatileBehavior)
+{
+    return (metatileBehavior == MB_MIRROR_6 ? TRUE : FALSE);
+}
+
+bool8 MetatileBehavior_IsFunhouseMirror7(u8 metatileBehavior)
+{
+    return (metatileBehavior == MB_MIRROR_7 ? TRUE : FALSE);
 }
 
 bool8 MetatileBehavior_IsIce(u8 metatileBehavior)

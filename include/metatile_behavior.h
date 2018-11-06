@@ -132,4 +132,12 @@ bool8 MetatileBehavior_IsTrashCan(u8);
 bool8 MetatileBehavior_IsShopShelf(u8);
 bool8 MetatileBehavior_IsBlueprint(u8);
 
+bool8 MetatileBehavior_IsFunhouseMirror1(u8);// vertical stretch
+bool8 MetatileBehavior_IsFunhouseMirror2(u8);// horizontal stretch
+bool8 MetatileBehavior_IsFunhouseMirror3(u8);// wavy
+bool8 MetatileBehavior_IsFunhouseMirror4(u8);// elongate head
+bool8 MetatileBehavior_IsFunhouseMirror5(u8);// opposite direction
+bool8 MetatileBehavior_IsFunhouseMirror6(u8);// upside down
+bool8 MetatileBehavior_IsFunhouseMirror7(u8);// trainer
+
 #endif // GUARD_METATILE_BEHAVIOR

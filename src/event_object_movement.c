@@ -17,6 +17,7 @@
 #include "constants/maps.h"
 #include "constants/event_object_movement_constants.h"
 #include "constants/event_objects.h"
+#include "mirror.h"
 
 // this file was known as evobjmv.c in Game Freak's original source
 
@@ -7248,7 +7249,7 @@ static void EventObjectUpdateMetatileBehaviors(struct EventObject *eventObj)
 
 static void GetGroundEffectFlags_Reflection(struct EventObject *eventObj, u32 *flags)
 {
-    u32 reflectionFlags[2] = { GROUND_EFFECT_FLAG_REFLECTION, GROUND_EFFECT_FLAG_ICE_REFLECTION };
+    u32 reflectionFlags[3] = { GROUND_EFFECT_FLAG_REFLECTION, GROUND_EFFECT_FLAG_ICE_REFLECTION, GROUND_EFFECT_FLAG_ICE_REFLECTION };
     u8 type = EventObjectCheckForReflectiveSurface(eventObj);
 
     if (type)
@@ -7477,6 +7478,20 @@ static u8 GetReflectionTypeByMetatileBehavior(u32 behavior)
         return 1;
     else if (MetatileBehavior_IsReflective(behavior))
         return 2;
+    else if (MetatileBehavior_IsFunhouseMirror1(behavior))
+        return 3;
+    else if (MetatileBehavior_IsFunhouseMirror2(behavior))
+        return 4;
+    else if (MetatileBehavior_IsFunhouseMirror3(behavior))
+        return 5;
+    else if (MetatileBehavior_IsFunhouseMirror4(behavior))
+        return 6;
+    else if (MetatileBehavior_IsFunhouseMirror5(behavior))
+        return 7;
+    else if (MetatileBehavior_IsFunhouseMirror6(behavior))
+        return 8;
+    else if (MetatileBehavior_IsFunhouseMirror7(behavior))
+        return 9;
     else
         return 0;
 }
@@ -7679,7 +7694,8 @@ void GroundEffect_MoveOnLongGrass(struct EventObject *eventObj, struct Sprite *s
 
 void GroundEffect_WaterReflection(struct EventObject *eventObj, struct Sprite *sprite)
 {
-    InitObjectReflectionSprite(eventObj, sprite, 0);
+    //InitObjectReflectionSprite(eventObj, sprite, 0);
+    InitFunhouseMirrorreflection(eventObj, sprite, 1);
 }
 
 void GroundEffect_IceReflection(struct EventObject *eventObj, struct Sprite *sprite)

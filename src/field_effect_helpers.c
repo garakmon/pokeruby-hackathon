@@ -11,8 +11,8 @@
 #include "constants/field_effects.h"
 #include "constants/songs.h"
 
-static void UpdateObjectReflectionSprite(struct Sprite *);
-static void LoadObjectReflectionPalette(struct EventObject *eventObject, struct Sprite *sprite);
+void UpdateObjectReflectionSprite(struct Sprite *);
+void LoadObjectReflectionPalette(struct EventObject *eventObject, struct Sprite *sprite);
 static void LoadObjectHighBridgeReflectionPalette(struct EventObject *, u8);
 static void LoadObjectRegularReflectionPalette(struct EventObject *, u8);
 static void FadeFootprintsTireTracks_Step0(struct Sprite *);
@@ -56,7 +56,7 @@ static s16 GetReflectionVerticalOffset(struct EventObject *eventObject)
     return GetEventObjectGraphicsInfo(eventObject->graphicsId)->height - 2;
 }
 
-static void LoadObjectReflectionPalette(struct EventObject *eventObject, struct Sprite *sprite)
+void LoadObjectReflectionPalette(struct EventObject *eventObject, struct Sprite *sprite)
 {
     u8 bridgeType;
     u16 bridgeReflectionVerticalOffsets[] = { 12, 28, 44 };
@@ -109,7 +109,7 @@ static void LoadObjectHighBridgeReflectionPalette(struct EventObject *eventObjec
     }
 }
 
-static void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
+void UpdateObjectReflectionSprite(struct Sprite *reflectionSprite)
 {
     struct EventObject *eventObject;
     struct Sprite *mainSprite;

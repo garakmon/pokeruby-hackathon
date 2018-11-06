@@ -234,12 +234,12 @@
 #define MB_BLUEPRINT 0xE6
 #define MB_UNUSED_E7 0xE7
 #define MB_UNUSED_E8 0xE8
-#define MB_UNUSED_E9 0xE9
-#define MB_UNUSED_EA 0xEA
-#define MB_UNUSED_EB 0xEB
-#define MB_UNUSED_EC 0xEC
-#define MB_UNUSED_ED 0xED
-#define MB_UNUSED_EE 0xEE
-#define MB_UNUSED_EF 0xEF
+#define MB_MIRROR_1 0xE9
+#define MB_MIRROR_2 0xEA
+#define MB_MIRROR_3 0xEB
+#define MB_MIRROR_4 0xEC
+#define MB_MIRROR_5 0xED
+#define MB_MIRROR_6 0xEE
+#define MB_MIRROR_7 0xEF
 
 #endif // GUARD_METATILE_BEHAVIORS
