@@ -9,6 +9,27 @@ struct BagPocket
     u8 capacity;
 };
 
+struct Item
+{
+    u8 name[14];
+    u16 itemId;
+    u16 price;
+    u8 holdEffect;
+    u8 holdEffectParam;
+    const u8 *description;
+    u8 importance;
+    u8 exitsBagOnUse; // unused, but items which have this field set to 1 all
+                      // exit the Bag when they are used.
+    u8 pocket;
+    u8 type;
+    ItemUseFunc fieldUseFunc;
+    u8 battleUsage;
+    ItemUseFunc battleUseFunc;
+    u16 secondaryId;
+};
+
+extern const struct Item gItems[];
+
 #define NUM_BAG_POCKETS 5
 
 void CopyItemName(u16 itemId, u8 *string);

@@ -1389,4 +1389,12 @@ static const u8 gItemDescription_HM08[] = _(
     "the 1st turn, then\n"
     "attacks next turn.");
 
+// Fall Festival Pokemans
+
+//   xxxxxxxxxxxxxxxxxx
+const u8 tempMonDescription[] = _(
+    "A WATER-type POKé-\n"
+    "MON for use during\n"
+    "the FALL FESTIVAL.");
+
 static const u8 gItemDescription_Dummy[] = _("");

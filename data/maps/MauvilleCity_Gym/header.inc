@@ -1,4 +1,4 @@
-MauvilleCity_Gym:: @ 830614C
+MauvilleCity_Gym::
 	.4byte MauvilleCity_Gym_Layout
 	.4byte MauvilleCity_Gym_MapEvents
 	.4byte MauvilleCity_Gym_MapScripts

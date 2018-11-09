@@ -27,6 +27,26 @@
 #include "decoration_inventory.h"
 #include "field_camera.h"
 #include "ewram.h"
+#include "event_data.h"
+
+#include "festival_stand.h"
+#include "constants/flags.h"
+#include "pokemon.h"
+
+// iwram
+static struct MartInfo gMartInfo;
+
+static int sStandNum;
+
+static const int sStandFlags[] = 
+{
+    FLAG_HIDE_FESTIVAL_STAND_A,
+    FLAG_HIDE_FESTIVAL_STAND_B,
+    FLAG_HIDE_FESTIVAL_STAND_C,
+    FLAG_HIDE_FESTIVAL_STAND_D,
+    FLAG_HIDE_FESTIVAL_STAND_E,
+    FLAG_HIDE_FESTIVAL_STAND_F,
+};
 
 extern bool8 SellMenu_QuantityRoller(u8, u8);
 
@@ -42,10 +62,10 @@ static void Task_ExitBuyMenuDoFade(u8);
 static void Task_UpdatePurchaseHistory(u8);
 static void Task_HandleShopMenuBuy(u8 taskId);
 static void Task_HandleShopMenuSell(u8 taskId);
-static void Task_HandleShopMenuQuit(u8 taskId);
+void Task_HandleShopMenuQuit(u8 taskId);
 static void Task_DoItemPurchase(u8 taskId);
 static void Task_CancelItemPurchase(u8 taskId);
-static void Task_DoBuySellMenu(u8);
+void Task_DoBuySellMenu(u8);
 static void Shop_FadeAndRunBuySellCallback(u8);
 static void BuyMenuDrawGraphics(void);
 static void sub_80B3240(void);
@@ -57,8 +77,7 @@ static void Shop_DoCursorAction(u8);
 static void Shop_LoadViewportObjects(void);
 static void Shop_AnimViewportObjects(void);
 
-// iwram
-static struct MartInfo gMartInfo;
+
 
 // ewram
 EWRAM_DATA u32 gMartTotalCost = 0;
@@ -69,15 +88,15 @@ EWRAM_DATA u8 gMartPurchaseHistoryId = 0;
 EWRAM_DATA u8 gUnknown_02038731 = 0; // This really should be in fldeff_escalator, but being in a new file aligns the ewram, which doesnt match the ROM.
 
 // rodata
-static const struct MenuAction2 sBuySellQuitMenuActions[] =
+const struct MenuAction2 sBuySellQuitMenuActions[] =
 {
     { MartText_Buy, Task_HandleShopMenuBuy },
     { MartText_Sell, Task_HandleShopMenuSell },
     { MartText_Quit2, Task_HandleShopMenuQuit },
 };
 
-static const u8 gMartBuySellOptionList[] = {SHOP_BUY, SHOP_SELL, SHOP_EXIT};
-static const u8 gMartBuyNoSellOptionList[] = {SHOP_BUY, SHOP_EXIT};
+const u8 gMartBuySellOptionList[] = {SHOP_BUY, SHOP_SELL, SHOP_EXIT};
+const u8 gMartBuyNoSellOptionList[] = {SHOP_BUY, SHOP_EXIT};
 
 static const u16 gUnusedMartArray[] = {0x2, 0x3, 0x4, 0xD, 0x121, 0xE, 0xE, 0xE, 0xE, 0xE, 0xE, 0x0, 0x0};
 
@@ -93,7 +112,7 @@ static u8 CreateShopMenu(u8 martType)
     gMartInfo.martType = martType;
     gMartInfo.cursor = 0;
 
-    if (martType == MART_TYPE_0)
+    if (martType == MART_TYPE_0 || martType == MART_TYPE_FESTIVAL_STAND)
     {
         gMartInfo.numChoices = 2;
         Menu_DrawStdWindowFrame(0, 0, 10, 7);
@@ -110,12 +129,12 @@ static u8 CreateShopMenu(u8 martType)
     return CreateTask(Task_DoBuySellMenu, 8);
 }
 
-static void SetShopMenuCallback(void *callbackPtr)
+void SetShopMenuCallback(void *callbackPtr)
 {
     gMartInfo.callback = callbackPtr;
 }
 
-static void SetShopItemsForSale(const u16 *items)
+void SetShopItemsForSale(const u16 *items)
 {
     u16 i = 0;
 
@@ -129,7 +148,7 @@ static void SetShopItemsForSale(const u16 *items)
     }
 }
 
-static void Task_DoBuySellMenu(u8 taskId)
+void Task_DoBuySellMenu(u8 taskId)
 {
     const u8 taskIdConst = taskId; // why is a local const needed to match?
 
@@ -152,7 +171,7 @@ static void Task_DoBuySellMenu(u8 taskId)
     else if (gMain.newKeys & A_BUTTON)
     {
         PlaySE(SE_SELECT);
-        if (gMartInfo.martType == MART_TYPE_0)
+        if (gMartInfo.martType == MART_TYPE_0 || gMartInfo.martType == MART_TYPE_FESTIVAL_STAND)
             sBuySellQuitMenuActions[gMartBuySellOptionList[gMartInfo.cursor]].func(taskIdConst);
         else
             sBuySellQuitMenuActions[gMartBuyNoSellOptionList[gMartInfo.cursor]].func(taskIdConst);
@@ -180,7 +199,7 @@ static void Task_HandleShopMenuSell(u8 taskId)
     FadeScreen(1, 0);
 }
 
-static void Task_HandleShopMenuQuit(u8 taskId)
+void Task_HandleShopMenuQuit(u8 taskId)
 {
     Menu_DestroyCursor();
     Menu_EraseWindowRect(0, 0, 11, 8);
@@ -605,7 +624,7 @@ static void Shop_DisplayPriceInList(int firstItemId, int lastItemId, bool32 hasC
 
     for (i = firstItemId; i <= lastItemId && gMartInfo.choicesAbove + i < gMartInfo.itemCount; i++)
     {
-        if (gMartInfo.martType == MART_TYPE_0)
+        if (gMartInfo.martType == MART_TYPE_0 || gMartInfo.martType == MART_TYPE_FESTIVAL_STAND)
             Shop_DisplayNormalPriceInList(gMartInfo.itemList[gMartInfo.choicesAbove + i], (i << 1) + 2, hasControlCode);
         else
             Shop_DisplayDecorationPriceInList(gMartInfo.itemList[gMartInfo.choicesAbove + i], (i << 1) + 2, hasControlCode);
@@ -622,7 +641,7 @@ static void Shop_PrintItemDescText(void)
 {
     if (gMartInfo.choicesAbove + gMartInfo.cursor != gMartInfo.itemCount)
     {
-        if (gMartInfo.martType == MART_TYPE_0)
+        if (gMartInfo.martType == MART_TYPE_0 || gMartInfo.martType == MART_TYPE_FESTIVAL_STAND)
         {
             sub_8072AB0(ItemId_GetDescription(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]),
                 0x4, 0x68, 0x68, 0x30, 0);
@@ -687,6 +706,48 @@ static void Task_DoItemPurchase(u8 taskId)
             else
             {
                 DisplayItemMessageOnField(taskId, gOtherText_NoRoomFor, Shop_DoPricePrintAndReturnToBuyMenu, 0xC3E1);
+            }
+        }
+        // TODO: fix
+        // the following is just about the dumbest (or at least most redundant) thing I've ever written
+        // but I've got like 2 hours to finish this thing lol
+        else if (gMartInfo.martType == MART_TYPE_FESTIVAL_STAND)
+        {
+            // set flag (bought mon) when player buys a pokemon
+            // that hides this mart and only shows the mart with items
+            // (or no mart at all?)
+            // if secondary id != 0 then givemon else give item
+            // add mon to party
+            //GiveMonToPlayer();
+            //GiveMonInitialMoveset()
+            if (gItems[gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]].secondaryId) {
+                if(GiveFestivalMonToPlayer(gItems[gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]].secondaryId))
+                {
+                    FlagSet(sStandFlags[sStandNum]);
+                    //Task_ExitBuyMenu(taskId);
+                    //Shop_RunExitSellMenuTask(taskId);
+                    //Task_HandleShopMenuQuit(taskId);
+                    DisplayItemMessageOnField(taskId, gOtherText_HereYouGo3, Shop_DoMonTransaction, 0xC3E1);
+                    Task_UpdatePurchaseHistory(taskId);
+                    //Task_HandleShopMenuQuit(taskId);
+                    //Task_CancelItemPurchase(taskId);
+                }
+                else
+                {
+                    DisplayItemMessageOnField(taskId, gOtherText_NoRoomFor, Shop_DoPricePrintAndReturnToBuyMenu, 0xC3E1);
+                }
+            }
+            else {
+                //
+                if (AddBagItem(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor], gTasks[taskId].tItemCount))
+                {
+                    DisplayItemMessageOnField(taskId, gOtherText_HereYouGo, Shop_DoItemTransaction, 0xC3E1);
+                    Task_UpdatePurchaseHistory(taskId);
+                }
+                else
+                {
+                    DisplayItemMessageOnField(taskId, gOtherText_NoRoomFor, Shop_DoPricePrintAndReturnToBuyMenu, 0xC3E1);
+                }
             }
         }
         else // a normal mart is only type 0, so types 1 and 2 are decoration marts.
@@ -1103,7 +1164,7 @@ static void Shop_DoCursorAction(u8 taskId)
                 Menu_DestroyCursor();
                 Menu_EraseWindowRect(0, 0xC, 0xD, 0x13);
 
-                if (gMartInfo.martType == MART_TYPE_0)
+                if (gMartInfo.martType == MART_TYPE_0 || gMartInfo.martType == MART_TYPE_FESTIVAL_STAND)
                 {
                     gMartTotalCost = (ItemId_GetPrice(gMartInfo.itemList[gMartInfo.choicesAbove + gMartInfo.cursor]) >> GetPriceReduction(1)); // set 1x price
                     if (!IsEnoughMoney(gSaveBlock1.money, gMartTotalCost))
@@ -1211,7 +1272,7 @@ static void Task_UpdatePurchaseHistory(u8 taskId)
 
 #undef tItemCount
 
-static void ClearItemPurchases(void)
+void ClearItemPurchases(void)
 {
     gMartPurchaseHistoryId = 0;
     ClearItemSlots(gMartPurchaseHistory, 3);
@@ -1239,6 +1300,15 @@ void Shop_CreateDecorationShop2Menu(u16 *itemList)
     SetShopMenuCallback(EnableBothScriptContexts);
 }
 
+void Festival_CreateStandMenu(u16 index)
+{
+    CreateShopMenu(MART_TYPE_FESTIVAL_STAND);
+    sStandNum = index;
+    SetShopItemsForSale(gFestivalStandMons[index]);
+    ClearItemPurchases();
+    SetShopMenuCallback(EnableBothScriptContexts);
+}
+
 #if DEBUG
 
 void debug_sub_80C2818(void)
@@ -1249,3 +1319,78 @@ void debug_sub_80C2818(void)
 }
 
 #endif
+
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- \\
+
+
+bool8 ScrCmd_festivalstand(struct ScriptContext *ctx) {
+    u16 standNum = VarGet(ScriptReadHalfword(ctx));
+    Festival_CreateStandMenu(standNum);
+    ScriptContext1_Stop();
+    return TRUE;
+}
+
+bool8 GiveFestivalMonToPlayer(u16 id) {
+    // holding a special item?
+    u16 nationalDexNum;
+    bool8 sentToPc;
+
+    struct Pokemon mon;
+
+    u8 level;
+    level = 50;
+    //u16 item = 0;
+
+    CreateMon(&mon, id, level, 32, 0, 0, 0, 0);
+    //heldItem[0] = item;
+    //heldItem[1] = item >> 8;
+    // void SetMonData(struct Pokemon *mon, s32 field, const void *dataArg);
+    //SetMonData(&mon, MON_DATA_HELD_ITEM, heldItem);
+    sentToPc = GiveMonToPlayer(&mon);
+    nationalDexNum = SpeciesToNationalPokedexNum(id);
+    return TRUE;
+};
+
+// For Mon transactions, I want to exit the shop because you can only buy
+// one Mon from each shop.
+void Shop_DoMonTransaction(u8 taskId) {
+    IncrementGameStat(GAME_STAT_SHOPPED);
+    RemoveMoney(&gSaveBlock1.money, gMartTotalCost);
+    PlaySE(SE_REGI);
+    UpdateMoneyWindow(gSaveBlock1.money, 0, 0);
+
+    Shop_DisplayPriceInList(gMartInfo.cursor, gMartInfo.cursor, 0);
+    Task_ReturnToBuyMenu(taskId);
+
+    BeginNormalPaletteFade(0xFFFFFFFF, 0, 0, 16, RGB(0, 0, 0));
+    gTasks[taskId].func = Task_ExitBuyMenuDoFade;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

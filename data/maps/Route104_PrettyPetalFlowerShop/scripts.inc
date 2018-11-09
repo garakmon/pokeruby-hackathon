@@ -48,7 +48,7 @@ Route104_PrettyPetalFlowerShop_EventScript_15BE73:: @ 815BE73
 Route104_PrettyPetalFlowerShop_EventScript_15BE7C:: @ 815BE7C
 	message Route104_PrettyPetalFlowerShop_Text_1A0C42
 	waitmessage
-	pokemartdecoration2 Route104_PrettyPetalFlowerShop_Items
+	pokemartdecoration Route104_PrettyPetalFlowerShop_Items
 	msgbox Route104_PrettyPetalFlowerShop_Text_1A0C02, 4
 	release
 	end

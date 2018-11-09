@@ -1,5 +1,6 @@
 #include "global.h"
 #include "constants/hold_effects.h"
+#include "constants/species.h"
 #include "item.h"
 #include "constants/items.h"
 #include "item_menu.h"
@@ -8,24 +9,7 @@
 #include "string_util.h"
 #include "strings.h"
 
-struct Item
-{
-    u8 name[14];
-    u16 itemId;
-    u16 price;
-    u8 holdEffect;
-    u8 holdEffectParam;
-    const u8 *description;
-    u8 importance;
-    u8 exitsBagOnUse; // unused, but items which have this field set to 1 all
-                      // exit the Bag when they are used.
-    u8 pocket;
-    u8 type;
-    ItemUseFunc fieldUseFunc;
-    u8 battleUsage;
-    ItemUseFunc battleUseFunc;
-    u8 secondaryId;
-};
+
 
 extern u8 gCurSelectedItemSlotIndex;
 extern struct BagPocket gBagPockets[NUM_BAG_POCKETS];
