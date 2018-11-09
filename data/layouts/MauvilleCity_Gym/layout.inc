@@ -6,8 +6,8 @@ MauvilleCity_Gym_MapBlockdata::
 
 	.align 2
 MauvilleCity_Gym_Layout::
-	.4byte 0xa
-	.4byte 0x15
+	.4byte 16
+	.4byte 21
 	.4byte MauvilleCity_Gym_MapBorder
 	.4byte MauvilleCity_Gym_MapBlockdata
 	.4byte gTileset_Building
