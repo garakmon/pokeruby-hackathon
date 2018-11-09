@@ -30,6 +30,7 @@ unk_debug_bss_3 = .;
     . += 0x4;
 #endif
 . = ALIGN(4); src/shop.o(.bss);
+. = ALIGN(4); src/festival_stand.o(.bss);
 . = ALIGN(4); src/record_mixing.o(.bss);
 . = ALIGN(4); src/tv.o(.bss);
 . = ALIGN(4); src/battle/battle_anim_80CA710.o(.bss);

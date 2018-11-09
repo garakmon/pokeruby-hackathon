@@ -938,10 +938,10 @@
 	.4byte \products
 	.endm
 
-	@ Apparent clone of pokemartdecoration.
-	.macro pokemartdecoration2 products
+	@ Opens the Fall Festival Stand system offering the specified mons for sale.
+	.macro festivalstand standnum
 	.byte 0x88
-	.4byte \products
+	.2byte \standnum
 	.endm
 
 	@ Starts up the slot machine minigame.

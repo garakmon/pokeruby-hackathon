@@ -1,11 +1,14 @@
 #ifndef GUARD_SHOP_H
 #define GUARD_SHOP_H
 
+#include "script.h"
+
 enum
 {
     MART_TYPE_0, // normal mart
     MART_TYPE_1,
     MART_TYPE_2,
+    MART_TYPE_FESTIVAL_STAND,
 };
 
 // shop view window NPC info enum
@@ -37,9 +40,26 @@ struct MartInfo
     /* 0xD */ u8 curItemCount; // if you are selling an item, this is the count of the current item stack you have.
 };
 
+// iwram
+//extern struct MartInfo gMartInfo = {};
+
+//extern struct MartInfo gMartInfo;
+extern const struct MenuAction2 sBuySellQuitMenuActions[];
+extern const u8 gMartBuyNoSellOptionList[];
+extern const u8 gMartBuySellOptionList[];
+
 void Shop_CreatePokemartMenu(u16 *);
 void Shop_CreateDecorationShop1Menu(u16 *);
 void Shop_CreateDecorationShop2Menu(u16 *);
 void Shop_RunExitSellMenuTask(u8 taskId);
+void SetShopItemsForSale(const u16*);
+void ClearItemPurchases(void);
+void SetShopMenuCallback(void *);
+void Task_HandleShopMenuQuit(u8 taskId);
+void Task_DoBuySellMenu(u8 taskId);
+
+//bool8 ScrCmd_festivalstand(struct ScriptContext *);
+//void Festival_CreateStandMenu(u16 *monIdList);
+//u8 CreateStandMenu(u8 type);
 
 #endif // GUARD_SHOP_H

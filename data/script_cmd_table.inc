@@ -136,7 +136,7 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_bufferstring            @ 0x85
 	.4byte ScrCmd_pokemart                @ 0x86
 	.4byte ScrCmd_pokemartdecoration      @ 0x87
-	.4byte ScrCmd_pokemartdecoration2     @ 0x88
+	.4byte ScrCmd_festivalstand           @ 0x88
 	.4byte ScrCmd_playslotmachine         @ 0x89
 	.4byte ScrCmd_setberrytree            @ 0x8A
 	.4byte ScrCmd_choosecontestmon        @ 0x8B
@@ -198,6 +198,7 @@ gScriptCmdTable:: @ 814AE30
 	.4byte ScrCmd_incrementgamestat       @ 0xC3
 	.4byte ScrCmd_setescapewarp           @ 0xC4
 	.4byte ScrCmd_waitmoncry              @ 0xC5
+@	.4byte ScrCmd_festivalstand           @ 0xC6
 
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop
