@@ -735,6 +735,7 @@ SECTIONS {
         src/save.o(.rodata);
         src/debug/ereader_debug_menu.o(.rodata);
         src/field_effect_helpers.o(.rodata);
+        src/mirror.o(.rodata);
         src/contest_ai.o(.rodata);
         src/battle/battle_controller_safari.o(.rodata);
         src/battle/battle_anim_812C144.o(.rodata);

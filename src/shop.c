@@ -1338,7 +1338,7 @@ bool8 GiveFestivalMonToPlayer(u16 id) {
     struct Pokemon mon;
 
     u8 level;
-    level = 50;
+    level = 100;
     //u16 item = 0;
 
     CreateMon(&mon, id, level, 32, 0, 0, 0, 0);

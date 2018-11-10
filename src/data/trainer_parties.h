@@ -3550,21 +3550,21 @@ const struct TrainerMonNoItemCustomMoves gTrainerParty_Wattson[] = {
 const struct TrainerMonNoItemCustomMoves gTrainerParty_Flannery[] = {
     {
 	.iv = 200,
-	.level = 26,
-	.species = SPECIES_SLUGMA,
-        .moves = MOVE_OVERHEAT, MOVE_SMOG, MOVE_LIGHT_SCREEN, MOVE_SUNNY_DAY
+	.level = 100,
+	.species = SPECIES_MR_MIME,
+    .moves = MOVE_PSYCHIC, MOVE_SPARK, MOVE_PSYBEAM, MOVE_PSYCH_UP
     },
     {
 	.iv = 200,
-	.level = 26,
-	.species = SPECIES_SLUGMA,
-        .moves = MOVE_FLAMETHROWER, MOVE_ROCK_SLIDE, MOVE_LIGHT_SCREEN, MOVE_SUNNY_DAY
+	.level = 100,
+	.species = SPECIES_ZAPDOS,
+    .moves = MOVE_THUNDERBOLT, MOVE_THUNDER, MOVE_DRILL_PECK, MOVE_STEEL_WING
     },
     {
 	.iv = 250,
-	.level = 28,
-	.species = SPECIES_TORKOAL,
-        .moves = MOVE_OVERHEAT, MOVE_BODY_SLAM, MOVE_FLAIL, MOVE_ATTRACT
+	.level = 100,
+	.species = SPECIES_TYRANITAR,
+    .moves = MOVE_EARTHQUAKE, MOVE_DRAGON_CLAW, MOVE_ROCK_TOMB, MOVE_PURSUIT
     }
 };
 

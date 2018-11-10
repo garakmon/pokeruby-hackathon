@@ -7695,7 +7695,7 @@ void GroundEffect_MoveOnLongGrass(struct EventObject *eventObj, struct Sprite *s
 void GroundEffect_WaterReflection(struct EventObject *eventObj, struct Sprite *sprite)
 {
     //InitObjectReflectionSprite(eventObj, sprite, 0);
-    InitFunhouseMirrorreflection(eventObj, sprite, 1);
+    InitFunhouseMirrorReflection(eventObj, sprite, 1);
 }
 
 void GroundEffect_IceReflection(struct EventObject *eventObj, struct Sprite *sprite)

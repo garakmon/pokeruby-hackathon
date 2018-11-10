@@ -1,4 +1,4 @@
-PetalburgCity_Gym:: @ 8305F38
+PetalburgCity_Gym::
 	.4byte PetalburgCity_Gym_Layout
 	.4byte PetalburgCity_Gym_MapEvents
 	.4byte PetalburgCity_Gym_MapScripts

@@ -544,8 +544,8 @@ static void StartTileset2Animation(void)
 void TilesetCB_General(void)
 {
     gTileset1AnimFrame = 0;
-    gTileset1AnimLength = 0x100;
-    gTileset1AnimCallback = sub_8073014;
+    //gTileset1AnimLength = 0x100;
+    //gTileset1AnimCallback = sub_8073014;
 }
 
 void TilesetCB_Building(void)

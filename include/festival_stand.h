@@ -39,37 +39,56 @@ void Task_HandleStandMenuQuit(u8 taskId);
 bool8 GiveFestivalMonToPlayer(u16 id);
 void Shop_DoMonTransaction(u8 taskId);
 
-const u16 StandA_Mons[] = 
-{
     //ITEM_FOCUS_BAND,
     //ITEM_CHOICE_BAND,
-    FESTIVAL_MON_POLITOED_LOW,
-    FESTIVAL_MON_POLITOED_HIGH,
+
+const u16 StandA_Mons[] = 
+{
+    FESTIVAL_MON_CLOYSTER,
+    FESTIVAL_MON_OCTILLERY,
+    FESTIVAL_MON_POLITOED,
+    FESTIVAL_MON_LUGIA,
+    ITEM_NONE,
 };
 
 const u16 StandB_Mons[] = 
 {
-    FESTIVAL_MON_POLITOED_LOW,
+    FESTIVAL_MON_SHARPEDO,
+    FESTIVAL_MON_WALREIN,
+    FESTIVAL_MON_ARTICUNO,
+    ITEM_NONE,
 };
 
 const u16 StandC_Mons[] = 
 {
-    FESTIVAL_MON_POLITOED_LOW,
+    FESTIVAL_MON_CAMERUPT,
+    FESTIVAL_MON_CHARIZARD,
+    FESTIVAL_MON_HO_OH,
+    ITEM_NONE,
 };
 
 const u16 StandD_Mons[] = 
 {
-    FESTIVAL_MON_POLITOED_LOW,
+    FESTIVAL_MON_SWALOT,
+    FESTIVAL_MON_MAWILE,
+    FESTIVAL_MON_MEDICHAM,
+    FESTIVAL_MON_SLAKING,
+    ITEM_NONE,
 };
 
 const u16 StandE_Mons[] = 
 {
-    FESTIVAL_MON_POLITOED_LOW,
+    FESTIVAL_MON_KANGASKHAN,
+    FESTIVAL_MON_TAUROS,
+    FESTIVAL_MON_PIDGEOT,
+    FESTIVAL_MON_WIGGLYTUFF,
+    ITEM_NONE,
 };
 
 const u16 StandF_Mons[] = 
 {
-    FESTIVAL_MON_POLITOED_LOW,
+    FESTIVAL_MON_MEWTWO,
+    ITEM_NONE,
 };
 
 const u16 * const gFestivalStandMons[] = 

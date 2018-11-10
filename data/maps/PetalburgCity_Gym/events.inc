@@ -1,4 +1,4 @@
-PetalburgCity_Gym_EventObjects:: @ 8387168
+PetalburgCity_Gym_EventObjects::
 	object_event 1, EVENT_OBJ_GFX_NORMAN, 0, 4, 3, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, PetalburgCity_Gym_EventScript_1545B9, FLAG_HIDE_NORMAN_PETALBURG_GYM
 	object_event 2, EVENT_OBJ_GFX_WOMAN_7, 0, 4, 94, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_154EE6, 0
 	object_event 3, EVENT_OBJ_GFX_MAN_4, 0, 4, 81, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_154DF6, 0
@@ -8,11 +8,10 @@ PetalburgCity_Gym_EventObjects:: @ 8387168
 	object_event 7, EVENT_OBJ_GFX_WOMAN_7, 0, 4, 16, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_154F5E, 0
 	object_event 8, EVENT_OBJ_GFX_MAN_4, 0, 4, 29, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 1, 0, PetalburgCity_Gym_EventScript_154EAA, 0
 	object_event 9, EVENT_OBJ_GFX_MAN_2, 0, 3, 109, 3, MOVEMENT_TYPE_FACE_DOWN, 0, 0, 0, 0, PetalburgCity_Gym_EventScript_15518B, FLAG_HIDE_PETALBURG_GYM_GUIDE
-	object_event 10, EVENT_OBJ_GFX_WALLY, 0, 4, 111, 3, MOVEMENT_TYPE_FACE_UP, 0, 0, 0, 0, 0x0, FLAG_HIDE_WALLY_PETALBURG_GYM
 
-PetalburgCity_Gym_MapWarps:: @ 8387258
-	warp_def 4, 111, 3, 2, MAP_PETALBURG_CITY
-	warp_def 5, 111, 3, 2, MAP_PETALBURG_CITY
+PetalburgCity_Gym_MapWarps::
+	warp_def 4, 111, 3, 0, MAP_LITTLEROOT_TOWN
+	warp_def 5, 111, 3, 0, MAP_LITTLEROOT_TOWN
 	warp_def 1, 105, 3, 3, MAP_PETALBURG_CITY_GYM
 	warp_def 7, 85, 3, 2, MAP_PETALBURG_CITY_GYM
 	warp_def 6, 85, 3, 2, MAP_PETALBURG_CITY_GYM
@@ -50,7 +49,7 @@ PetalburgCity_Gym_MapWarps:: @ 8387258
 	warp_def 7, 7, 3, 33, MAP_PETALBURG_CITY_GYM
 	warp_def 6, 7, 3, 33, MAP_PETALBURG_CITY_GYM
 
-PetalburgCity_Gym_MapBGEvents:: @ 8387388
+PetalburgCity_Gym_MapBGEvents::
 	bg_event 1, 105, 3, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_Gym_EventScript_154B73
 	bg_event 7, 105, 3, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_Gym_EventScript_154BC3
 	bg_event 1, 79, 3, BG_EVENT_PLAYER_FACING_ANY, PetalburgCity_Gym_EventScript_154BF8
@@ -66,5 +65,5 @@ PetalburgCity_Gym_MapBGEvents:: @ 8387388
 	bg_event 1, 110, 3, BG_EVENT_PLAYER_FACING_NORTH, PetalburgCity_Gym_EventScript_1551AA
 	bg_event 7, 110, 3, BG_EVENT_PLAYER_FACING_NORTH, PetalburgCity_Gym_EventScript_1551BA
 
-PetalburgCity_Gym_MapEvents:: @ 8387430
+PetalburgCity_Gym_MapEvents::
 	map_events PetalburgCity_Gym_EventObjects, PetalburgCity_Gym_MapWarps, 0x0, PetalburgCity_Gym_MapBGEvents

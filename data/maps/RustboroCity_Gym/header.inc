@@ -1,4 +1,4 @@
-RustboroCity_Gym:: @ 8306280
+RustboroCity_Gym::
 	.4byte RustboroCity_Gym_Layout
 	.4byte RustboroCity_Gym_MapEvents
 	.4byte RustboroCity_Gym_MapScripts

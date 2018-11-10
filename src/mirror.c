@@ -18,6 +18,18 @@ extern void UpdateObjectReflectionSprite(struct Sprite *);
 extern void LoadObjectReflectionPalette(struct EventObject *eventObject, struct Sprite *sprite);
 //void UpdateObjectMirrorSprite(struct Sprite *);
 
+const union AffineAnimCmd gabcde[] =
+{
+    //AFFINEANIMCMD_FRAME(0xFFFB, 0xFFFB, 0, 10),
+    AFFINEANIMCMD_FRAME(0x5, 0x5, 0, 10),
+    AFFINEANIMCMD_JUMP(0),
+};
+
+const union AffineAnimCmd *const affineTable69[] =
+{
+    gabcde,
+};
+
 int test(int x, int y)
 {
     if (!y)
@@ -29,7 +41,7 @@ int test(int x, int y)
     return (x + y);
 }
 
-void InitFunhouseMirrorreflection(struct EventObject *eventObject, struct Sprite *sprite, u8 type)
+void InitFunhouseMirrorReflection(struct EventObject *eventObject, struct Sprite *sprite, u8 type)
 {
     struct Sprite *reflection;
 
@@ -87,11 +99,13 @@ void InitFunhouseMirrorreflection(struct EventObject *eventObject, struct Sprite
     reflection->oam.priority = 3;
     reflection->oam.paletteNum = gReflectionEffectPaletteMap[reflection->oam.paletteNum];
     reflection->usingSheet = TRUE;
+    // affine mode
     reflection->anims = gDummySpriteAnimTable;
     StartSpriteAnim(reflection, 0);
-    reflection->affineAnims = gDummySpriteAffineAnimTable;
+    //reflection->oam.affineMode = ST_OAM_AFFINE_NORMAL;
+    //reflection->affineAnims = affineTable69; //gDummySpriteAffineAnimTable;
     reflection->affineAnimBeginning = TRUE;
-    reflection->subspriteMode = SUBSPRITES_OFF;
+    reflection->subspriteMode = SUBSPRITES_ON;
     reflection->data[0] = sprite->data[0];
     reflection->data[1] = eventObject->localId;
     reflection->data[7] = TRUE;
@@ -114,29 +128,38 @@ void UpdateObjectMirrorSprite(struct Sprite *reflectionSprite)
         reflectionSprite->oam.paletteNum = gReflectionEffectPaletteMap[mainSprite->oam.paletteNum];
         reflectionSprite->oam.shape = mainSprite->oam.shape;
         reflectionSprite->oam.size = mainSprite->oam.size;
-        reflectionSprite->oam.matrixNum = mainSprite->oam.matrixNum | 0x10;
+        //reflectionSprite->oam.matrixNum = mainSprite->oam.matrixNum;// | (((reflectionSprite->hFlip ^ mainSprite->hFlip) & 1) << 3);// | 0x10;
+        //SetOamMatrix(u8 matrixNum, u16 a, u16 b, u16 c, u16 d)
+        //SetOamMatrix(mainSprite->oam.matrixNum, 0x10, 0x08, 0x18, 0x08);//1, 0, 0, 1);
+        reflectionSprite->oam.matrixNum = mainSprite->oam.matrixNum;
         reflectionSprite->oam.tileNum = mainSprite->oam.tileNum;
+        reflectionSprite->subspriteMode = SUBSPRITES_ON;
         reflectionSprite->subspriteTables = mainSprite->subspriteTables;
-        reflectionSprite->subspriteTableNum = mainSprite->subspriteTableNum;
-        reflectionSprite->invisible = mainSprite->invisible;
-        reflectionSprite->pos1.x = mainSprite->pos1.x;// + mainSprite->data[3];
-        // reflectionSprite->data[2] holds an additional vertical offset, used by the high bridges on Route 120
-        reflectionSprite->pos1.y = mainSprite->pos1.y + reflectionSprite->data[2] - BLOCK_HEIGHT;// + mainSprite->data[4];
+        reflectionSprite->subspriteTableNum = mainSprite->subspriteTableNum;// + 10;
+        reflectionSprite->invisible = FALSE;
+        reflectionSprite->pos1.x = mainSprite->pos1.x;
+        reflectionSprite->pos1.y = mainSprite->pos1.y + reflectionSprite->data[2] - BLOCK_HEIGHT;
         reflectionSprite->centerToCornerVecX = mainSprite->centerToCornerVecX;
         reflectionSprite->centerToCornerVecY = mainSprite->centerToCornerVecY;
-        reflectionSprite->pos2.x = mainSprite->pos2.x;// + mainSprite->data[3];//?
-        reflectionSprite->pos2.y = -mainSprite->pos2.y;
+        reflectionSprite->pos2.x = mainSprite->pos2.x;
+        reflectionSprite->pos2.y = mainSprite->pos2.y;
         reflectionSprite->coordOffsetEnabled = mainSprite->coordOffsetEnabled;
 
+        //if (mainSprite->oam.matrixNum & 0x8)
+        //    reflectionSprite->oam.matrixNum = 0x10;
+
+        //if (mainSprite->oam.matrixNum & 0x02)
+        //    reflectionSprite->oam.matrixNum = 0;//0x10;
+
         // Check if the reflection is not still.
-        if (reflectionSprite->data[7] == FALSE)
+        /*if (reflectionSprite->data[7] == FALSE)
         {
             // Sets the reflection sprite's rot/scale matrix to the appropriate
             // matrix based on whether or not the main sprite is horizontally flipped.
             // If the sprite is facing to the east, then it is flipped, and its matrixNum is 8.
             reflectionSprite->oam.matrixNum = 0;
-            if (mainSprite->oam.matrixNum & 0x8)
+            if (mainSprite->oam.matrixNum & 0x10)//& 0x8)
                 reflectionSprite->oam.matrixNum = 1;
-        }
+        }*/
     }
 }
