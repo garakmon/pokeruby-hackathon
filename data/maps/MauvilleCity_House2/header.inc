@@ -1,4 +1,4 @@
-MauvilleCity_House2:: @ 83061BC
+MauvilleCity_House2::
 	.4byte House1_Layout
 	.4byte MauvilleCity_House2_MapEvents
 	.4byte MauvilleCity_House2_MapScripts

@@ -30,6 +30,8 @@
 #include "secret_base.h"
 #include "text.h"
 #include "tv.h"
+#include "heal_location.h"
+#include "constants/heal_locations.h"
 
 EWRAM_DATA u8 gDifferentSaveFile = 0;
 EWRAM_DATA u8 gUnknown_020297ED = 0;
@@ -179,7 +181,7 @@ void NewGameInitData(void)
     ResetGabbyAndTy();
     ResetSecretBases();
     ClearBerryTrees();
-    gSaveBlock1.money = 3000;
+    gSaveBlock1.money = 0;//3000;
     ResetLinkContestBoolean();
     ResetGameStats();
     ResetContestAndMuseumWinners();
@@ -204,6 +206,8 @@ void NewGameInitData(void)
     WarpToInitialMap();
     ScriptContext2_RunNewScript(gUnknown_0819FA81);
     EnableNationalPokedex();
+    //gSaveBlock1.lastHealLocation = GetHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_1);
+    Overworld_SetHealLocationWarp(HEAL_LOCATION_LITTLEROOT_TOWN_1);
 }
 
 #if DEBUG

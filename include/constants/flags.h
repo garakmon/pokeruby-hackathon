@@ -768,6 +768,8 @@
 #define FLAG_HIDE_FESTIVAL_STAND_E          0x4E5
 #define FLAG_HIDE_FESTIVAL_STAND_F          0x4E6
 
+#define FLAG_FESTIVAL_BIRCH                 0x4E7
+
 #define TRAINER_FLAG_START 0x500
 
 

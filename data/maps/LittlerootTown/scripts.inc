@@ -97,10 +97,75 @@ FestivalGym:: @ 8153741
     release
     end
 
-Festival_Stand_Bought_Mon_Text:: @ 81A0BE4
-    .string "Uhhhhh gtfo... you\p"
-    .string "already spent tickets here.$"
+Festival_Bug_Catcher:: @ 814C087
+    msgbox Text_Festival_Bug_Catcher, 2
+    end
 
-BeatFestivalMan::
-    .string ".......\p"
-    .string ".......ugh.$"
+Festival_Contest_Judge:: @ 814C087
+    msgbox Text_Festival_Judge, 2
+    end
+
+Festival_Little_Girl:: @ 814C087
+    msgbox Text_Festival_Little_Girl_1, 2
+    end
+
+Festival_Artist:: @ 814C087
+    msgbox Text_Festival_Artist, 2
+    end
+
+Festival_Beauty:: @ 814C087
+    msgbox Text_Festival_Beauty, 2
+    end
+
+Festival_Camper:: @ 814C087
+    msgbox Text_Festival_Camper, 2
+    end
+
+Festival_Duskull:: @ 814C087
+    msgbox Text_Festival_Duskull, 2
+    end
+
+Festival_Prof_Birch_2:: @ 814C087
+    msgbox Text_Festival_Birch_2
+    goto_if_unset FLAG_FESTIVAL_BIRCH, Festival_Prof_Birch_1
+    end
+
+Festival_Prof_Birch_1::
+    msgbox Text_Festival_Birch_1, 2
+    givemoney 3000, 0
+    setflag FLAG_FESTIVAL_BIRCH
+    end
+
+Festival_Little_Boy_3:: @ 814C087
+    msgbox Text_Festival_Little_Boy_3, 2
+    end
+
+Festival_Man_5:: @ 814C087
+    msgbox Text_Festival_Man_5, 2
+    end
+
+Festival_Black_Belt:: @ 814C087
+    msgbox Text_Festival_Black_Belt, 2
+    end
+
+Festival_Pumpkin_Lady:: @ 814C087
+    msgbox Text_Festival_Pumpkin_Lady, 2
+    end
+
+Festival_Boy_2:: @ 814C087
+    msgbox Text_Festival_Boy_2, 2
+    end
+
+Festival_Boy_1:: @ 814C087
+    msgbox Text_Festival_Boy_1, 2
+    end
+
+Festival_Boy_3:: @ 814C087
+    msgbox Text_Festival_Boy_3, 2
+    end
+
+Festival_Girl_3:: @ 814C087
+    msgbox Text_Festival_Girl_3, 2
+    end
+
+
