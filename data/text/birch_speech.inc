@@ -9,7 +9,11 @@ gBirchSpeech_ThisIsPokemon:: @ 81C6DF8
 	.string "This is what we call a “POKéMON.”$"
 
 gBirchSpeech_WorldInhabitedByPokemon:: @ 81C6E1A
-	.string "ThIS iS pLaCEhOldEr tEXt.\p$"
+	.string "Please excuse the kinks--\n"
+	.string "this is our first time.\p"
+	.string "Come find me on the FESTIVAL\n"
+	.string "grounds, I have something for you.$"
+@	.string "ThIS iS pLaCEhOldEr tEXt.\p$"
 @	.string "This world is widely inhabited by\n"
 @	.string "creatures known as POKéMON.\p"
 @	.string "We humans live alongside POKéMON,\n"
